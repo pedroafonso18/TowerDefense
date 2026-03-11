@@ -21,12 +21,14 @@ class Player {
 
     void HandleMovement();
 
+    Rectangle GetRectangle() const;
+
   private:
     
     Texture texture;
     Vector2 position;
     float rotation;
-      
+    
     void SetTexture(
       Texture _texture
     );

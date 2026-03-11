@@ -91,3 +91,16 @@ void Player::HandleMovement()
 
   UpdateRotation(targetRotation);
 }
+
+Rectangle Player::GetRectangle() const
+{
+  float playerW = texture.width + GameConst::SPRITE_SCALE;
+  float playerH = texture.height + GameConst::SPRITE_SCALE;
+
+  return {
+    position.x - playerW * 0.5f,
+    position.y - playerH * 0.5f,
+    playerW,
+    playerH
+  };
+}
