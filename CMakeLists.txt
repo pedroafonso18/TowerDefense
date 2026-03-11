@@ -18,6 +18,9 @@ FetchContent_MakeAvailable(raylib)
 add_executable(
   TowerDefense
   src/main.cpp
+  src/Player.cpp
+  include/Constants.h
+  include/Player.h
 )
 
 target_link_libraries(TowerDefense PRIVATE raylib)
