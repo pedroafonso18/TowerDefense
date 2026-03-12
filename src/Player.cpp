@@ -104,3 +104,15 @@ Rectangle Player::GetRectangle() const
     playerH
   };
 }
+
+bool Player::GetIsHoldingCrate() const
+{
+  return isHoldingCrate;
+}
+
+void Player::SetIsHoldingCrate(
+  bool _isHoldingCrate
+)
+{
+  isHoldingCrate = _isHoldingCrate;
+}

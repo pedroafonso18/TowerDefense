@@ -23,11 +23,18 @@ class Player {
 
     Rectangle GetRectangle() const;
 
+    bool GetIsHoldingCrate() const;
+
+    void SetIsHoldingCrate(
+      bool _isHoldingCrate
+    );
+
   private:
     
     Texture texture;
     Vector2 position;
     float rotation;
+    bool isHoldingCrate = false;
     
     void SetTexture(
       Texture _texture
