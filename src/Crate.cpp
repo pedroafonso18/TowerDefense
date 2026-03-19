@@ -7,9 +7,9 @@ Crate::Crate()
   Image crateImage = LoadImage("../assets/crate.png");
   crateTexture = LoadTextureFromImage(crateImage);
   UnloadImage(crateImage);
-
+  const int playerModelOffset = 200;
   position = {
-    (float)GameConst::SCREEN_WIDTH/2 + 200,
+    (float)GameConst::SCREEN_WIDTH/2 + playerModelOffset,
     (float)GameConst::SCREEN_HEIGHT/2
   };
 }
@@ -75,7 +75,9 @@ void Crate::HandleCrate(
   if (canDrawCrate){
     HandleCratePickup(player);
     HandleCrateMovement(player);
-    if (IsIntersectingWithHole(hole)) {
+    if (isFollowingPlayer && IsIntersectingWithHole(hole)) {
+      player.SetIsHoldingCrate(false);
+      isFollowingPlayer = false;
       DespawnCrate();
     }
   }
@@ -83,6 +85,7 @@ void Crate::HandleCrate(
 
 void Crate::DespawnCrate() {
   canDrawCrate = false;
+  isFollowingPlayer = false;
 }
 
 bool Crate::IsIntersectingWithHole(
