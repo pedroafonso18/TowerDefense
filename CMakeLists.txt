@@ -20,9 +20,11 @@ add_executable(
   src/main.cpp
   src/Player.cpp
   src/Crate.cpp
+  src/Hole.cpp
   include/Constants.h
   include/Player.h
   include/Crate.h
+  include/Hole.h
 )
 
 target_link_libraries(TowerDefense PRIVATE raylib)

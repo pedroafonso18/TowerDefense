@@ -3,6 +3,7 @@
 
 #include <raylib.h>
 #include "../include/Player.h"
+#include "../include/Hole.h"
 
 class Crate {
   public:
@@ -21,12 +22,18 @@ class Crate {
     void DespawnCrate();
 
     void HandleCrate(
-      Player& player
+      Player& player,
+      Hole& hole
+    );
+
+    bool IsIntersectingWithHole(
+      Hole& hole
     );
 
   private:
     Texture crateTexture;
     Vector2 position;
+    bool canDrawCrate = true;
     bool isFollowingPlayer = false;
 
     void Draw();

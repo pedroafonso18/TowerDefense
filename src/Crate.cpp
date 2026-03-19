@@ -9,7 +9,7 @@ Crate::Crate()
   UnloadImage(crateImage);
 
   position = {
-    (float)GameConst::SCREEN_WIDTH/2,
+    (float)GameConst::SCREEN_WIDTH/2 + 200,
     (float)GameConst::SCREEN_HEIGHT/2
   };
 }
@@ -35,7 +35,9 @@ Rectangle Crate::GetRectangle() {
 }
 
 void Crate::SpawnCrate() {
-  Draw();
+  if (canDrawCrate) {
+    Draw();
+  }
 }
 
 void Crate::Draw() {
@@ -57,17 +59,35 @@ void Crate::HandleCrateMovement(
 )
 {
   if (isFollowingPlayer) {
+    const int textureOffset = 45;
     position = {
       player.GetPosition().x - crateTexture.width * 0.5f,
-      player.GetPosition().y - crateTexture.height * 0.5f
+      player.GetPosition().y - crateTexture.height * 0.5f - textureOffset
     };
   }
 }
 
 void Crate::HandleCrate(
-  Player& player
+  Player& player,
+  Hole& hole
 )
 {
-  HandleCratePickup(player);
-  HandleCrateMovement(player);
+  if (canDrawCrate){
+    HandleCratePickup(player);
+    HandleCrateMovement(player);
+    if (IsIntersectingWithHole(hole)) {
+      DespawnCrate();
+    }
+  }
+}
+
+void Crate::DespawnCrate() {
+  canDrawCrate = false;
+}
+
+bool Crate::IsIntersectingWithHole(
+  Hole& hole
+)
+{
+  return CheckCollisionRecs(hole.GetRectangle(), GetRectangle());
 }
